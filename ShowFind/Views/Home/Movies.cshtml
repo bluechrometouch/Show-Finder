@@ -1,0 +1,120 @@
+﻿@model ShowFinder.Models.DiscoverMoviesParameters
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.primaryReleaseYear, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.primaryReleaseYear, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.primaryReleaseYear, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.primaryReleaseDateGte, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.primaryReleaseDateGte, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.primaryReleaseDateGte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <script>
+            $(function () {
+                $('#primaryReleaseDateGte').datetimepicker(
+                {
+                    format: 'YYYY-MM-DD',
+                    showTodayButton: true
+                });
+            });
+        </script>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.primaryReleaseDateLte, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.primaryReleaseDateLte, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.primaryReleaseDateLte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <script>
+            $(function () {
+                $('#primaryReleaseDateLte').datetimepicker(
+                {
+                    format: 'YYYY-MM-DD',
+                    showTodayButton: true
+                });
+            });
+        </script>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sortBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.sortBy, new SelectList(ShowFinder.Models.DiscoverMoviesParameters.SortBy, "Key", "Value"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.sortBy, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.voteCountGte, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.voteCountGte, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.voteCountGte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.voteCountLte, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.voteCountLte, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.voteCountLte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.voteAverageGte, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.voteAverageGte, new SelectList(new double?[] { null, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0 }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.voteAverageGte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.voteAverageLte, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.voteAverageLte, new SelectList(new double?[] { null, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0 }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.voteAverageLte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.withGenres, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(model => model.withGenres, new MultiSelectList(ShowFinder.Models.Genre.MovieGenres, "Key", "Value"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.withGenres, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+}
+
+@section Styles {
+    @Styles.Render("~/Content/bootstrap-datetimepicker")
+}

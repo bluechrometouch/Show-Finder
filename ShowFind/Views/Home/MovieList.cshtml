@@ -1,0 +1,17 @@
+﻿@model ShowFinder.Models.DiscoverMoviesList
+
+<div>
+    @Html.Partial("_MovieNavigation")
+        @if (Model.results.Any())
+        {
+            @Html.DisplayFor(model => model.results)
+        }
+        else
+        {
+            <div class="col-md-4 col-sm-6 col-xs-12">No Movie Information</div>
+        }
+    @Html.Partial("_MovieNavigation")
+</div>
+
+@Scripts.Render("~/bundles/jquery.rateit")
+@Styles.Render("~/Content/jquery.rateit")

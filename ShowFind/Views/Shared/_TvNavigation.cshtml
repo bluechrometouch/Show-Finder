@@ -1,0 +1,41 @@
+﻿@model ShowFinder.Models.DiscoverTvShowsList
+
+<div class="page-navigation">
+    @if (Model.page == 1)
+    {
+        <button type="button" class="btn btn-default btn-lg" disabled>
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous
+        </button>
+    }
+    else
+    {
+        <button type="button" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("TvList", "Home", new {id = (Model.page - 1)})';return false;">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous
+        </button>
+    }
+
+    <h3 class="page-count"> @Html.DisplayFor(model => model.page) / @Html.DisplayFor(model => model.total_pages) </h3>
+    @if (Model.page == Model.total_pages)
+    {
+        <button type="button" class="btn btn-default btn-lg" disabled>
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Next
+        </button>
+    }
+    else
+    {
+        <button type="button" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("TvList", "Home", new {id = (Model.page + 1)})';return false;">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Next
+        </button>
+    }
+
+    <dl class="dl-horizontal page-results">
+        <dt>
+            @Html.DisplayNameFor(model => model.total_results)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_results)
+        </dd>
+
+    </dl>
+</div>
